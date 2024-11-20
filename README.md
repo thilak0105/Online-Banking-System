@@ -88,5 +88,5 @@ A robust Django-based web application designed to handle various aspects of onli
 ## Contributors
 - Thilak L - [GitHub Profile](https://github.com/thilak0105)
 - Teammate 1 - [Subramanian G](https://github.com/Demoncyborg07)
-- Teammate 2 - [GitHub Profile](https://github.com/teammate2)
+- Teammate 2 - [Raghul A R](https://github.com/a-steel-heart)
 
