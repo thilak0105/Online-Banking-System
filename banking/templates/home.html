@@ -1,0 +1,355 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Your Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1d4ed8;
+            --secondary-color: #189607;
+            --background-color: #f0f2f5;
+            --text-color: #272727;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info span, .user-info a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .user-info a:hover {
+            opacity: 0.8;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            padding: 1rem;
+        }
+
+        .nav-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .accounts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .account-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .account-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .account-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .view-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .view-more:hover {
+            color: #357abd;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .action-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-info {
+                margin-top: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <h1>
+                    <a href="{% url 'home' %}"><i class="fas fa-university"></i> Welcome to Your Bank</a>
+                </h1>
+                <div class="user-info">
+                    <span id="welcome-message"><i class="fas fa-user"></i> Welcome, {{ name.fname }}</span>
+                    <a href="{% url 'profile' customer.cin_id %}" class="profile-link"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="{% url 'logout' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+                <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+                <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice-dollar"></i> Bill Payment</a></li>
+                <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+            </ul>
+        </div>
+    </nav>
+  
+    <br>
+    <!-- Main Content Section -->
+    <main class="container">
+        <!-- Account Overview -->
+        <section class="account-overview">
+            <h2><i class="fas fa-wallet"></i> Account Summary</h2>
+            <div class="accounts-container">
+                {% for account in accounts %}
+                    {% if account.acc_type == 'SB' %}
+                        <div class="account-card" style="background-color: #4CAF50;">
+                    {% elif account.acc_type == 'CA' %}
+                        <div class="account-card" style="background-color: #FF9800;">
+                    {% elif account.acc_type == 'SA' %}
+                        <div class="account-card" style="background-color: #9C27B0;">
+                    {% elif account.acc_type == 'FD' %}
+                        <div class="account-card" style="background-color: #E91E63;">
+                    {% endif %}
+                        <h3><i class="fas fa-piggy-bank"></i> {{ account.acc_no }}</h3>
+                        <p><strong>Type:</strong> {{ account.acc_type }}</p>
+                        <p><strong>Balance:</strong> ₹{{ account.acc_balance }}</p>
+                        <p><strong>Status:</strong> {{ account.acc_status }}</p>
+                    </div>
+                {% empty %}
+                    <p>No accounts found for this user.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Recent Transactions -->
+        <section class="recent-transactions">
+            <h2><i class="fas fa-exchange-alt"></i> Recent Transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From Account</th>
+                        <th>To Account</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in recent_transactions %}
+                        <tr>
+                            <td>{{ transaction.trans_time }}</td>
+                            <td>{{ transaction.from_acc.acc_no }}</td>
+                            <td>{{ transaction.to_acc.acc_no }}</td>
+                            {% if transaction.from_acc in accounts %}
+                                <td style="color: #e53935;">- ₹ {{ transaction.trans_amt }}</td>
+                            {% else %}
+                                <td style="color: #43a047;">+ ₹ {{ transaction.trans_amt }}</td> 
+                            {% endif %}    
+                            <td>{{ transaction.trans_status }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No recent transactions available.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'transaction_history' %}" class="view-more">View All Transactions <i class="fas fa-arrow-right"></i></a>
+        </section>
+
+        <!-- Quick Actions Section -->
+        <section class="quick-links">
+            <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            <div class="actions-grid">
+                <a href="{% url 'transferview' %}" class="action-link"><i class="fas fa-exchange-alt "></i>  Transfer Funds</a>
+                <a href="{% url 'bill_pay' %}" class="action-link"><i class="fas fa-file-invoice-dollar "></i>  Pay a Bill</a>
+                <a href="{% url 'loans' %}" class="action-link"><i class="fas fa-hand-holding-usd "></i>  Manage Loans</a>
+                <a href="{% url 'manage_cards' %}" class="action-link"><i class="fas fa-credit-card "></i>  Manage Cards</a>
+                <a href="{% url 'pay-loan' %}" class="action-link"><i class="fas fa-money-bill-wave "></i>  Pay Loan</a>
+                <a href="{% url 'freeze-acc' %}" class="action-link"><i class="fas fa-lock"></i>  Freeze My Account</a>
+                <a href="{% url 'transaction_history' %}" class="action-link"><i class=" fas fa-history"></i> Transactions Hist </a>
+                <a href="{% url 'support' %}" class="action-link"><i class=" fas fa-headset"></i> Customer 
+                support </a>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Bank. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+{% endblock content %}

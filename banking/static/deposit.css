@@ -1,0 +1,104 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(4.webp);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.login-form {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+input[type="submit"] {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+#error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+    .login-form {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="submit"] {
+        font-size: 0.9rem;
+    }
+}

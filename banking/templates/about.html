@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Modern Banking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #475569;
+            --accent: #3b82f6;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F8FAFC;
+            --bg-dark: #E2E8F0;
+            --success: #10B981;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: -4rem auto 0;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            position: relative;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            position: relative;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section {
+            padding: 32px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+
+        .timeline::before {
+            left: 0;
+        }
+
+        .timeline-item {
+            width: 100%;
+            left: 0 !important;
+            text-align: left !important;
+            padding-left: 2rem;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+            /* Add new styles for founders section */
+        .founders-section {
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .founder-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .founder-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .founder-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .founder-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .founder-title {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .founder-bio {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar">
+            <a href="{% url 'members' %}" class="back-btn"> ← Back</a>
+        </nav>
+        <section class="hero-section">
+            
+            <div class="hero-content">
+    
+                <h1>Shaping the Future of Banking</h1>
+                <p>Welcome to a new era of financial services where innovation meets tradition. We're committed to providing world-class banking solutions that empower our customers to achieve their financial goals.</p>
+            </div>
+        </section>
+    </div>
+    
+
+
+    <div class="founders-grid">
+        <div class="founder-card">
+            <div class="founder-info">
+                <h3 class="founder-name">Raghul A R</h3>
+                <p class="founder-title">Framework Manager</p>
+                <p class="founder-bio"> Creating a strong base in the backend and Ensure all frameworks comply with industry standards, regulations, and organizational policies. Regularly audit and update frameworks to align with changes in laws or strategic goals.</p>
+                <div class="founder-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="founder-card">
+            <div class="founder-info">
+                <h3 class="founder-name">Subramanian G</h3>
+                <p class="founder-title">Frontend Development</p>
+                <p class="founder-bio">I enjoy solving complex challenges related to user experience, accessibility, and performance optimization, always striving to stay ahead of the latest trends and  technologies in  web  development.</p>
+                <div class="founder-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="founder-card">
+            <div class="founder-info">
+                <h3 class="founder-name">Thilak L</h3>
+                <p class="founder-title">Framework and Backend Manager </p>
+                <p class="founder-bio">Design and implement efficient frameworks to streamline processes, improve project management, and enhance collaboration across team members.</p>
+                <div class="founder-social">
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="about-container">
+        <div class="card">
+            <h2 class="section-title">Our Mission</h2>
+            <p>We're on a mission to revolutionize banking by making it more accessible, secure, and personalized for everyone. Through cutting-edge technology and exceptional service, we're building a financial ecosystem that works for you.</p>
+            
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number">1M+</div>
+                    <p>Happy Customers</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <p>Branches</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <p>Customer Support</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99%</div>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="card">
+            <h2 class="section-title">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fas fa-shield-alt value-icon"></i>
+                    <h3>Trust & Security</h3>
+                    <p>Your security is our top priority. We employ state-of-the-art technology to protect your assets and data.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-lightbulb value-icon"></i>
+                    <h3>Innovation</h3>
+                    <p>We continuously evolve our services to provide you with the most advanced banking solutions.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fas fa-star value-icon"></i>
+                    <h3>Excellence</h3>
+                    <p>We strive for excellence in everything we do, ensuring the highest standards of service.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2032</h3>
+                        <p>Launched innovative mobile banking platform</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2030</h3>
+                        <p>Expanded to 150+ branches nationwide</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2024</h3>
+                        <p>Introduced digital banking services</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2020</h3>
+                        <p>Founded with a vision for better banking</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        <p>support@yourbank.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        <p>1-800-123-4567</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <div>
+                        <h3>Visit Us</h3>
+                        <p>Find your nearest branch</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

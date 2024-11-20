@@ -1,0 +1,374 @@
+{% extends 'users/base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1d5de6f0;
+            --primary-dark: #1549b9ec;
+            --secondary: #073baaed;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --error: #EF4444;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+            background: url("{% static 'css/2.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            min-height: calc(100vh - 70px);
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                       0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 1.875rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.6); /* White with 60% opacity */
+            padding: 1rem; /* Add some padding for better spacing */
+            border-radius: 0.5rem; /* Optional: Add rounded corners */
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i:not(.password-toggle) {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-wrapper input[type="password"] {
+            padding-right: 2.5rem;  /* Space for the toggle button */
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            left: auto !important;  /* Override the left positioning */
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+            position: absolute;
+            
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .login-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .login-button:hover i {
+            transform: translateX(4px);
+        }
+
+        .messages {
+            margin-top: 1rem;
+        }
+
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background: #FEE2E2;
+            color: var(--error);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .login-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'members' %}" class="back-btn"> ← Back</a>
+    </nav>
+
+    <main class="main-container">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome back</h1>
+                <p>Please enter your credentials to continue</p>
+            </div>
+
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="user_input">User ID</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input 
+                            type="text" 
+                            id="user_input" 
+                            name="user_input" 
+                            required 
+                            autocomplete="username"
+                            placeholder="Enter your User ID "
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                        >
+                        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+
+                    <a href="{% url 'reset_password' %}" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-button">
+                    <span>Login</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Password visibility toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const userInput = document.getElementById('user_input').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!userInput || !password) {
+                e.preventDefault();
+                const messages = document.querySelector('.messages') || document.createElement('div');
+                messages.className = 'messages';
+                messages.innerHTML = `
+                    <div class="message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Please fill in all required fields</span>
+                    </div>
+                `;
+                
+                if (!document.querySelector('.messages')) {
+                    this.appendChild(messages);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

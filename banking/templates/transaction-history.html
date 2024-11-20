@@ -1,0 +1,375 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #1d4ed8;
+            --secondary-color: #189607;
+            --background-color: #f0f2f5;
+            --text-color: #272727;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .user-info a:hover {
+            opacity: 0.8;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            padding: 1rem;
+        }
+
+        .nav-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        #button-container {
+            margin-bottom: 2rem;
+        }
+
+        #download-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #download-btn:hover {
+            background-color: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .transaction-table-container {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background-color: #f8f9fa;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-color);
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            color: #495057;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+            transition: background-color 0.2s;
+        }
+
+        .amount-debit {
+            color: #e74c3c !important;
+            font-weight: 500;
+        }
+
+        .amount-credit {
+            color: #27ae60 !important;
+            font-weight: 500;
+        }
+
+        .status-failed {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .status-success {
+            background-color: #2ecc71;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-info {
+                margin-top: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li {
+                padding: 0.5rem 1rem;
+            }
+
+            .transaction-table-container {
+                overflow-x: auto;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            th, td {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <h1>
+                    <a href="{% url 'home' %}"><i class="fas fa-university"></i> Your Bank</a>
+                </h1>
+                <div class="user-info">
+                    <a href="{% url 'profile' customer.cin_id %}" class="profile-link"><i class="fas fa-user-circle"></i> My Profile</a>
+                    <a href="{% url 'logout' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+                <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+                <li><a href="{% url 'transferview' %}"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
+                <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice-dollar"></i> Bill Payment</a></li>
+                <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="page-header">
+            <h2><i class="fas fa-history"></i> Transaction History</h2>
+            <div id="button-container">
+                <button id="download-btn"><i class="fas fa-download"></i> Download PDF</button>
+            </div>
+        </div>
+
+        <div class="transaction-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>From Account</th>
+                        <th>To Account</th>
+                        <th>Amount</th>
+                        <th>Date & Time</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.trans_id }}</td>
+                        <td>{{ transaction.from_acc }}</td>
+                        <td>{{ transaction.to_acc }}</td>
+                        {% if transaction.from_acc in accounts %}
+                        <td class="amount-debit">- ₹ {{ transaction.trans_amt }}</td>
+                        {% else %}
+                        <td class="amount-credit">+ ₹ {{ transaction.trans_amt }}</td> 
+                        {% endif %}          
+                        <td>{{ transaction.trans_time }}</td>
+                        {% if transaction.get_trans_status_display == 'FAILED' %}
+                        <td><span class="status-failed">{{ transaction.get_trans_status_display }}</span></td>
+                        {% else %}
+                        <td><span class="status-success">{{ transaction.get_trans_status_display }}</span></td>
+                        {% endif %}
+                        <td>{{ transaction.remarks }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <p>No transactions available.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Bank. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('download-btn').addEventListener('click', () => {
+            const element = document.querySelector('main');
+            const buttonContainer = document.getElementById('button-container');
+            const downloadBtn = document.getElementById('download-btn');
+
+            // Show loading state
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            downloadBtn.disabled = true;
+
+            // Generate the PDF
+            html2pdf()
+                .set({
+                    margin: 1,
+                    filename: 'transaction-history.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+                })
+                .from(element)
+                .save()
+                .then(() => {
+                    // Restore button state
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                    downloadBtn.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

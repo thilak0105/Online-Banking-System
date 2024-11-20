@@ -1,0 +1,415 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Security - Your Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1d4ed8;
+            --danger-color: #dc2626;
+            --background-color: #f0f2f5;
+            --text-color: #272727;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --gradient-bg: linear-gradient(135deg, rgba(29, 78, 216, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-image: var(--gradient-bg);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            padding: 1rem;
+        }
+
+        .nav-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+        /* Header and Navigation styles remain the same as before */
+
+        .main-content {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--danger-color);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+        }
+
+        .error {
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert-danger {
+            background-color: #fee2e2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+
+        .alert i {
+            margin-right: 0.5rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-confirm {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .modal-btn-cancel {
+            background-color: #e5e7eb;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <h1>
+                    <a href="{% url 'home' %}"><i class="fas fa-university"></i> Welcome to Your Bank</a>
+                </h1>
+                <div class="user-info">                   
+                    <a href="{% url 'logout' %}" class="logout-link" style="text-decoration: none; color: white;padding-left: 8px;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+                <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+                <li><a href="{% url 'transferview' %}"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
+                <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice-dollar"></i> Bill Payment</a></li>
+                <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-lock"></i> Account Security</h2>
+                    <p>Select the account you want to freeze for security purposes</p>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form id="freeze-account-form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.account_choices.id_for_label }}">
+                            <i class="fas fa-credit-card"></i> Select Account
+                        </label>
+                        {{ form.account_choices }}
+                        {% if form.account_choices.errors %}
+                            <div class="error">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ form.account_choices.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-lock"></i> Freeze Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Confirm Account Freeze</h3>
+            <p>Are you sure you want to freeze this account? This action will temporarily disable all transactions.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-btn modal-btn-confirm" onclick="confirmFreeze()">Confirm Freeze</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced JavaScript -->
+    <script>
+        // Show error messages in a modal instead of alert
+        window.onload = function() {
+            var messageElement = document.getElementById("error-message");
+            if (messageElement) {
+                showModal(messageElement.innerText);
+            }
+        };
+
+        // Form submission handling with confirmation
+        document.getElementById('freeze-account-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmationModal').style.display = 'flex';
+        });
+
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        function confirmFreeze() {
+            document.getElementById('freeze-account-form').submit();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('confirmationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,211 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url("2.jpg");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: 100%;
+}
+
+.back{
+    position: absolute;
+    top: 50px;
+    left: 100px;
+}
+
+.backbtn {
+    text-align: center;
+    padding: 10px;
+    background-color: #1c5bd9;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+
+
+}
+
+
+.backbtn:hover{
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #0044cc;
+    color: white;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #1c5bd9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #0044cc;
+}
+
+a {
+    color: #1c5bd9;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#0044cc;
+    text-decoration: underline;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+}
+
+
+.back {
+    position: fixed; /* Keeps the button fixed in the viewport */
+    top: 20px; /* Adjust top margin as needed */
+    left: 20px; /* Adjust left margin as needed */
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+
+.backbtn {
+    text-align: center;
+    padding: 10px 15px;
+    background-color: #1c5bd9;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.backbtn:hover {
+    cursor: pointer;
+    background-color: #0044cc;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 95%; /* Full width to match container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.btn {
+    width: 80%;
+    padding: 10px;
+    background-color: #1c5bd9;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    margin: 0 auto; /* Horizontally center the button */
+}
+
+.btn:hover {
+    background-color: #0044cc;
+}
+
+a {
+    color: #1c5bd9;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0044cc;
+    text-decoration: underline;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+}

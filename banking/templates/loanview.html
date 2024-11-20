@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="{% static 'css/trans2.css' %}">
+    <script type="text/javascript">
+        window.onload = function() {
+            var messageElement = document.getElementById("error-message");
+            if (messageElement) {
+                // Show pop-up alert and clear form if message exists
+                alert(messageElement.innerText);
+                document.getElementById("transaction-form").reset();  // Reset the form after clicking "OK"
+            }
+        };
+
+        // AJAX script to update the due amount when the loan is selected
+        document.addEventListener("DOMContentLoaded", function() {
+            const loanSelect = document.getElementById("id_to_loan_no"); // Adjust to match your select element's ID
+            const dueAmtField = document.getElementById("id_due_amt"); // Ensure this matches your due amount field's ID
+
+            loanSelect.addEventListener("change", function() {
+                const loanId = this.value;
+                fetch(`/get-loan-due-amount/${loanId}/`)  // Create a URL route to handle this request
+                    .then(response => response.json())
+                    .then(data => {
+                        dueAmtField.value = data.due_amt; // Update the due amount field
+                    })
+                    .catch(error => console.error('Error fetching due amount:', error));
+            });
+        });
+    </script>
+</head>
+<body style="background-image: url(4.webp); background-size: cover; height: 100vh">
+    <header>
+        <div class="header-container">
+            <h1> <a href="{% url 'home' %}" style="text-decoration: none; color: white;">Welcome to Your Bank</a></h1>
+            <div class="user-info">
+                <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+            <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+            <li><a href="{% url 'transferview' %}"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
+            <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice-dollar"></i> Bill Payment</a></li>
+            <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+            <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+        </ul>
+    </nav>
+
+    <div class="login-form">
+        <h2>Transaction Form</h2>
+
+        <!-- Message section -->
+        {% if messages %}
+            <div>
+                <ul>
+                    {% for message in messages %}
+                        <li id="error-message" class="{{ message.tags }}" style="display: none;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Transaction form -->
+        <form id="transaction-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.from_acc.label_tag }} {{ form.from_acc }}
+                {% if form.from_acc.errors %}
+                    <div class="error">{{ form.from_acc.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.to_loan_no.label_tag }} {{ form.to_loan_no }}
+                {% if form.to_loan_no.errors %}
+                    <div class="error">{{ form.to_loan_no.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.due_amt.label_tag }} {{ form.due_amt }}
+                {% if form.due_amt.errors %}
+                    <div class="error">{{ form.due_amt.errors }}</div>
+                {% endif %}
+            </div>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    <!-- JavaScript to handle form submission (placeholder for now) -->
+    <script>
+        document.getElementById('transfer-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Transfer initiated!');
+            // Here you would handle the form data and call your backend or API
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

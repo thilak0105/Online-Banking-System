@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Account Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #475569;
+            --accent: #f59e0b;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F8FAFC;
+            --bg-dark: #E2E8F0;
+            --success: #10B981;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .profile-link, .logout-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .profile-link {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .logout-link {
+            background: rgba(239, 68, 68, 0.9);
+        }
+
+        .profile-link:hover, .logout-link:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-menu {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .nav-menu li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary);
+            background: var(--bg-light);
+        }
+
+        /* Main Content Styles */
+        .profile-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .user-info-profile, .account-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .info-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .info-label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .account-card {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .account-status {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .status-active {
+            background: var(--success);
+            color: white;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: var(--primary);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <h1>
+                <a href="{% url 'home' %}">Welcome to Your Bank</a>
+            </h1>
+            <div class="user-info">
+                <a href="{% url 'profile' customer.cin %}" class="profile-link">
+                    <i class="fas fa-user"></i> My Profile
+                </a>
+                <a href="{% url 'logout' %}" class="logout-link">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+            <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+            <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice"></i> Bill Payment</a></li>
+            <li><a href="{% url 'loans' %}"><i class="fas fa-money-bill-wave"></i> Loans</a></li>
+            <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+        </ul>
+    </nav>
+
+    <!-- Profile and Account Info Section -->
+    <div class="profile-container">
+        <div class="card user-info-profile">
+            <h2 class="section-title">User Profile</h2>
+            <div class="info-group">
+                <span class="info-label">Customer ID (CIN)</span>
+                <span class="info-value">{{ customer.cin }}</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Full Name</span>
+                <span class="info-value">{{ customer.fname }} {{ customer.lname }}</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Phone Number</span>
+                <span class="info-value">{{ phone }}</span>
+            </div>
+            <div class="info-group">
+                <span class="info-label">Email Address</span>
+                <span class="info-value">{{ email }}</span>
+            </div>
+            <div class="profile-actions">
+                <a href="#" class="action-button">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+                
+            </div>
+        </div>
+        
+        <div class="card account-info">
+            <h2 class="section-title">Account Information</h2>
+            {% for account in accounts %}
+                <div class="account-card">
+                    <div class="info-group">
+                        <span class="info-label">Account Number</span>
+                        <span class="info-value">{{ account.acc_no }}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Account Type</span>
+                        <span class="info-value">{{ account.acc_type }}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Status</span>
+                        <span class="account-status status-active">{{ account.acc_status }}</span>
+                    </div>
+                    <div class="info-group">
+                        <span class="info-label">Opening Date</span>
+                        <span class="info-value">{{ account.date_of_opening }}</span>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No accounts found for this user.</p>
+            {% endfor %}
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/emphome.css' %}">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="{% url 'emphome' %}" style="text-decoration: none; color: rgb(253, 253, 253); text-align: center;">
+                <h2>Your Bank</h2>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="active">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+            <a href="{% url 'cashdeposit' %}">
+                <i class="fas fa-users"></i>
+                Deposit Cash
+            </a>
+            <a href="{% url 'unfreeze-account' %}">
+                <i class="fas fa-exchange-alt"></i>
+                Unfreeze Accounts
+            </a>
+            <a href="{% url 'freeze' %}">
+                <i class="fas fa-chart-line"></i>
+                freeze Accounts
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <h1>Employee Dashboard</h1>
+            <div class="user-actions">
+                <span class="employee-name">Welcome, Employee</span>
+                <button class="logout-btn" onclick="window.location.href='{% url 'employee_logout' %}'">Logout</button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Total Accounts</h3>
+                        <p class="number">{{ accounts|length }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Active Accounts</h3>
+                        <p class="number">{{ active_accounts_count }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Low Balance Accounts</h3>
+                        <p class="number">{{ low_balance_accounts_count }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounts Table -->
+            <div class="accounts-section">
+                <div class="section-header">
+                    <h2>All Account Numbers</h2>
+
+
+                    <div class="actions">
+                        <input type="text" placeholder="Search accounts..." class="search-input">
+                        <button class="export-btn">Export</button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="accounts-table">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Account Type</th>
+                                <th>Account Balance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for account in accounts %}
+                            <tr>
+                                <td>{{ account.acc_no }}</td>
+                                <td>{{ account.acc_type }}</td>
+                                <td>₹{{ account.acc_balance }}</td>
+                                <td>
+                                    <span class="status-badge {% if account.acc_status == 'A' %}status-active{% elif account.acc_status == 'F' %}status-inactive{% else %}status-low-balance{% endif %}">
+                                        {% if account.acc_status == 'A' %}Active{% elif account.acc_status == 'F' %}Frozen{% else %}Low Balance{% endif %}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="no-data">No accounts found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

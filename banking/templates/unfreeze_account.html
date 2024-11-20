@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unfreeze Account</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/trans2.css' %}">
+</head>
+<body style="background-image: url(4.webp); background-size: cover; height: 100vh">
+    
+
+    <div class="login-form">
+        <h2>Unfreeze Account</h2>
+
+        <!-- Message section -->
+        {% if messages %}
+            <div>
+                <ul>
+                    {% for message in messages %}
+                        <li id="error-message" class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Unfreeze Account form -->
+        <form id="unfreeze-account-form" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.acc_no.label_tag }} {{ form.acc_no }}
+                {% if form.acc_no.errors %}
+                    <div class="error">{{ form.acc_no.errors }}</div>
+                {% endif %}
+            </div>
+            <input type="submit" value="Unfreeze Account" class="btn btn-primary" />
+        </form>
+    </div>
+</body>
+</html>

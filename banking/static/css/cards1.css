@@ -1,0 +1,91 @@
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    background-color: #f0f0f0;
+    width: 300px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease; /* Added transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Card moves up slightly on hover */
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.card-number {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.card-type {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.credit-debit {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.monthly-limit {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.exp-date {
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 5px; /* Moved it further down */
+    right: 20px;
+}
+
+.no-cards {
+    text-align: center;
+    font-size: 1.2em;
+    color: red;
+}
+
+/* Styles for the Update button */
+.update-button {
+    background-color: #28a745; /* Green background for the button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth color and size transitions */
+    margin-top: 15px; /* Add some spacing above the button */
+}
+
+.update-button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+.update-button:active {
+    transform: scale(0.98); /* Button shrinks a bit when clicked */
+}

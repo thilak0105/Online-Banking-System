@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourBank - Modern Banking Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(165deg, #1e3a8a 0%, #2563eb 100%);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href=' ' class="text-4xl font-bold text-blue-600">Your Bank</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="about" class="nav-link text-gray-600 hover:text-blue-600" style="font-size: 19px " >About Us</a>
+                    <a href="about" class="nav-link text-gray-600 hover:text-blue-600" style="font-size: 19px "  >Support</a>
+                    <a href="emplogin" class="nav-link text-gray-600 hover:text-blue-600" style="font-size: 19px " >Staff Login</a>
+                    <a href="login" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-40 pb-40">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-6xl font-bold text-white mb-6">Your Bank, Your Way!</h1>
+            <p class="text-xl text-blue-100 mb-8">Safe and secure banking from anywhere, anytime.</p>
+            <a href="login" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Login to Your Account
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="feature-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Easy Fund Transfers</h3>
+                    <p class="text-gray-600">Transfer funds securely and quickly between accounts or to other banks.</p>
+                </div>
+                <div class="feature-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Track Your Spending</h3>
+                    <p class="text-gray-600">Monitor your spending with detailed transaction history and reports.</p>
+                </div>
+                <div class="feature-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Pay Bills Online</h3>
+                    <p class="text-gray-600">Pay your utility bills, credit cards, and loans with just a few clicks.</p>
+                </div>
+                
+                <div class="feature-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Customer Support</h3>
+                    <p class="text-gray-600">Get help anytime with our 24/7 customer support services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Section -->
+    <section class="bg-blue-600 py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Low-Interest Personal Loans</h2>
+                    <p class="text-gray-600 mb-6">Get a personal loan at competitive rates. Easily manage able loan accounts.</p>
+                    <a href="#" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Learn More</a>
+                </div>
+                <div class="bg-white p-8 rounded-xl">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Easily Manage able cards</h2>
+                    <p class="text-gray-600 mb-6">View your credit card and debit cards with control in your hand.</p>
+                    <a href="#" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Bank with Confidence</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Secure Encryption</h3>
+                    <p class="text-gray-600">Our banking platform is encrypted with industry-standard security protocols.</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Two-Factor Authentication</h3>
+                    <p class="text-gray-600">Add an extra layer of security to protect your account.</p>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Privacy Protection</h3>
+                    <p class="text-gray-600">Your personal information is safe with us.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="mb-4 md:mb-0">&copy; 2024 YourBank. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-blue-400 transition">Terms of Service</a>
+                    <a href="#" class="hover:text-blue-400 transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-blue-400 transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

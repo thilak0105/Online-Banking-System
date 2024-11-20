@@ -1,0 +1,325 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Cards - Your Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1d4ed8;
+            --secondary-color: #189607;
+            --background-color: #f0f2f5;
+            --text-color: #272727;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-container h1 a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            padding: 1rem;
+        }
+
+        .nav-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation styles remain the same */
+
+        .cards-section {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .card-number {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-info {
+            margin-bottom: 1rem;
+        }
+
+        .card-type {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-limits-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .card-limits-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-limits-form input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .update-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .update-button:hover {
+            background-color: #1e40af;
+        }
+
+        .exp-date {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .no-cards {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-container">
+                <h1>
+                    <a href="{% url 'home' %}"><i class="fas fa-university"></i> Welcome to Your Bank</a>
+                </h1>
+                <div class="user-info">
+                    <a href="{% url 'profile' customer.cin_id %}" class="profile-link" style="text-decoration: none; color: white;">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </a>
+                    <a href="{% url 'logout' %}" class="logout-link" style="text-decoration: none; color: white;padding-left: 8px;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Account Summary</a></li>
+                <li><a href="{% url 'transaction_history' %}"><i class="fas fa-history"></i> Transactions</a></li>
+                <li><a href="{% url 'bill_pay' %}"><i class="fas fa-file-invoice-dollar"></i> Bill Payment</a></li>
+                <li><a href="{% url 'loans' %}"><i class="fas fa-hand-holding-usd"></i> Loans</a></li>
+                <li><a href="{% url 'support' %}"><i class="fas fa-headset"></i> Customer Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="cards-section">
+            <h2 class="section-title"><i class="fas fa-credit-card"></i> Manage Your Cards</h2>
+            
+            <div class="cards-container">
+                {% for card in atm_cards %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>Account Number: {{ card.acc_no.acc_no }}</h3>
+                        <div class="card-number">
+                            {{ card.card_no|stringformat:"s"|slice:":4" }} **** **** {{ card.card_no|stringformat:"s"|slice:"-4:" }}
+                        </div>
+                        <div class="card-type">{{ card.get_card_type_display }}</div>
+                        <div class="credit-debit">{{ card.get_cred_debt_display }} Card</div>
+                    </div>
+
+                    <form class="card-limits-form" action="{% url 'edit_card_limit' card.card_no %}" method="POST">
+                        {% csrf_token %}
+                        <label for="monthly_limit">
+                            <i class="fas fa-money-bill-wave"></i> Monthly Limit
+                        </label>
+                        <input type="number" 
+                               name="monthly_limit" 
+                               value="{{ card.monthly_limit }}" 
+                               min="1000" 
+                               step="1000">
+                        <button type="submit" class="update-button">
+                            <i class="fas fa-sync-alt"></i> Update Limit
+                        </button>
+                    </form>
+
+                    <div class="exp-date">
+                        <i class="fas fa-calendar-alt"></i> Expires: {{ card.exp_date|date:"F Y" }}
+                    </div>
+                </div>
+                {% empty %}
+                <div class="no-cards">
+                    <i class="fas fa-credit-card fa-2x"></i>
+                    <p>No ATM cards found.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Bank. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,182 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #27efe5 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+        }
+
+        .input-group p {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .input-group a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .input-group a:hover {
+            text-decoration: underline;
+        }
+
+        .error-messages {
+            background-color: #27efe5;
+            border: 1px solid #27efe5;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 1rem;
+        }
+
+        .error-messages p {
+            color: #d32f2f;
+            margin: 0;
+        }
+
+        .back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .backbtn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .backbtn:hover {
+            background-color: #357abd;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <script>
+        function goback() {
+            window.history.back();  
+        }
+    </script>
+</head>
+<body>
+    <div class="back">
+        <a href="{% url 'members' %}" class="back-btn"> ← Back</a>
+    </div>
+
+    <div class="container">
+        <div class="login-form">
+            <h2><i class="fas fa-user-lock"></i> Employee Login</h2>
+            
+            <form action="{% url 'employee_login' %}" method="post">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label for="user_input"><i class="fas fa-user"></i> User ID</label>
+                    <input type="text" id="user_input" name="user_input" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="input-group">
+                    <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+                </div>
+
+                <div class="input-group">
+                    <p>Forgot Password? <a href="{% url 'emp_reset_password' %}">Reset Password</a></p>
+                </div>
+
+                {% if messages %}
+                    <div class="error-messages">
+                        {% for message in messages %}
+                            <p><i class="fas fa-exclamation-circle"></i> {{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
