@@ -1,96 +1,92 @@
-Online Banking System
+# Online Banking System
+
 A robust Django-based web application designed to handle various aspects of online banking, including account management, loan tracking, and transactions. This system ensures seamless user experience and adheres to business rules, offering features for both customers and employees.
 
-Features
-Customer Features
-Secure login and authentication using custom credentials.
-Access to account details, including:
-Personal information
-Account balance and transaction history
-Loan tracking:
-View active loans and installment schedules
-Account status management (Active, Frozen, Low Balance).
-User-friendly dashboard for a seamless banking experience.
-Employee Features
-Dedicated employee login.
-Employee-specific dashboard showing managed loan accounts.
-Tools to manage account statuses and loan details.
-Admin Features
-Manage customer and employee accounts.
-Assign roles and permissions.
-Generate and monitor loan and transaction reports.
-Technologies Used
-Backend: Django (Python), PostgreSQL
-Frontend: HTML, CSS
-Libraries/Tools:
-Django ORM for database interactions
-Custom User Authentication (AbstractBaseUser and PermissionsMixin)
-Secure password management
-Version Control: Git & GitHub
-Setup Instructions
-Prerequisites
-Python 3.9+
-PostgreSQL
-Git
-Steps to Run the Project
-Clone the repository:
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/<your-username>/Online-Banking-System/actions) 
 
-bash
-Copy code
-git clone https://github.com/<your-username>/Online-Banking-System.git
-cd Online-Banking-System
-Set up a virtual environment:
+## Features
 
-bash
-Copy code
-python -m venv env
-source env/bin/activate  # For macOS/Linux
-env\Scripts\activate     # For Windows
-Install dependencies:
+### Customer Features
+- Secure login and authentication using custom credentials.
+- Access to account details, including:
+  - Personal information
+  - Account balance and transaction history
+- Loan tracking:
+  - View active loans and installment schedules
+  - Account status management (Active, Frozen, Low Balance).
+- User-friendly dashboard for a seamless banking experience.
 
-bash
-Copy code
-pip install -r requirements.txt
-Configure the database:
+### Employee Features
+- Dedicated employee login.
+- Employee-specific dashboard showing managed loan accounts.
+- Tools to manage account statuses and loan details.
 
-Update settings.py with your PostgreSQL database credentials.
-Run migrations:
-bash
-Copy code
-python manage.py makemigrations
-python manage.py migrate
-Create a superuser for admin access:
+### Admin Features
+- Manage customer and employee accounts.
+- Assign roles and permissions.
+- Generate and monitor loan and transaction reports.
 
-bash
-Copy code
-python manage.py createsuperuser
-Run the development server:
+## Technologies Used
 
-bash
-Copy code
-python manage.py runserver
-Access the application at http://127.0.0.1:8000/.
+- **Backend**: Django (Python), PostgreSQL
+- **Frontend**: HTML, CSS
+- **Libraries/Tools**:
+  - Django ORM for database interactions
+  - Custom User Authentication (AbstractBaseUser and PermissionsMixin)
+  - Secure password management
 
-Project Highlights
-Database Models:
-Customer model for customer details
-Account model for account information
-Loan and Installments models for loan tracking
-Transactions model for transaction history
-Custom Authentication: Separate login flows for customers and employees.
-Dynamic Dashboards: Tailored interfaces for customers and employees.
-Error Handling: Ensures smooth transactions and account updates.
-Screenshots
-(Add screenshots of your home page, customer profile, employee dashboard, etc.)
+## Installation
 
-Future Enhancements
-Add session handling for enhanced security.
-Integrate advanced reporting tools for admin users.
-Implement notification systems for due installments.
-Contributors
-Your Name - GitHub Profile
-Teammate 1 - GitHub Profile
-Teammate 2 - GitHub Profile
-License
-This project is licensed under the MIT License.
+### Prerequisites
+- Python 3.9+
+- PostgreSQL
+- Django 
+
+### Steps to Run the Project
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/Online-Banking-System.git
+   cd Online-Banking-System
+   ```
+2. Set up a virtual environment:
+   ```bash
+   python -m venv env
+   source env/bin/activate  # For macOS/Linux
+   env\Scripts\activate     # For Windows
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Configure the database:
+   Update `settings.py` with your PostgreSQL database credentials.
+5. Run migrations:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+6. Create a superuser for admin access:
+   ```bash
+   python manage.py createsuperuser
+   ```
+7. Run the development server:
+   ```bash
+   python manage.py runserver
+   ```
+8. Access the application at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+
+## Screenshots
+
+<img width="1280" alt="Screenshot 2024-11-20 at 2 33 35 PM" src="https://github.com/user-attachments/assets/71715fee-0043-4e36-8ccf-013831249c31">
+
+
+## Future Enhancements
+- Add security like capcha verification for password reset.
+- Integrate advanced reporting tools for admin users.
+- Implement notification systems for due installments.
+
+## Contributors
+- Your Name - [GitHub Profile](https://github.com/thilak0105)
+- Teammate 1 - [GitHub Profile](https://github.com/teammate1)
+- Teammate 2 - [GitHub Profile](https://github.com/teammate2)
 
