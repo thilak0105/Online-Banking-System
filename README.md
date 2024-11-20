@@ -86,7 +86,7 @@ A robust Django-based web application designed to handle various aspects of onli
 - Implement notification systems for due installments.
 
 ## Contributors
-- Your Name - [GitHub Profile](https://github.com/thilak0105)
-- Teammate 1 - [GitHub Profile](https://github.com/teammate1)
+- Thilak L - [GitHub Profile](https://github.com/thilak0105)
+- Teammate 1 - [GitHub Profile](https://github.com/Demoncyborg07)
 - Teammate 2 - [GitHub Profile](https://github.com/teammate2)
 
